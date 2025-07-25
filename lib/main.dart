@@ -2,6 +2,7 @@ import 'package:europe_flag_quiz/data/questions.dart';
 import 'package:europe_flag_quiz/home_page.dart';
 import 'package:europe_flag_quiz/question_page.dart';
 import 'package:europe_flag_quiz/results_page.dart';
+import 'package:europe_flag_quiz/review_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const QuizApp());
@@ -29,6 +30,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   String activePage = 'home-page';
   List<String> selectedAnswers = [];
+  Map<String, Object> quizSummary = {};
 
   void switchPage(String page) {
     setState(() {
@@ -42,6 +44,26 @@ class _QuizState extends State<Quiz> {
   void selectAnswer(String answer) {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
+      final summary = List.generate(selectedAnswers.length, (index) {
+        final question = questions[index];
+        return {
+          'question_index': index,
+          'question': question.text,
+          'correct_answer': question.answers[0],
+          'user_answer': selectedAnswers[index],
+        };
+      });
+
+      final correctCount = summary
+          .where((entry) => entry['correct_answer'] == entry['user_answer'])
+          .length;
+
+      quizSummary = {
+        'summary': summary,
+        'total_questions': questions.length,
+        'correct_answers': correctCount,
+      };
+
       switchPage('results-page');
     }
   }
@@ -55,7 +77,17 @@ class _QuizState extends State<Quiz> {
         page = QuestionPage(selectAnswer);
         break;
       case 'results-page':
-        page = ResultsPage(() => switchPage('home-page'), selectedAnswers);
+        page = ResultsPage(
+          () => switchPage('home-page'),
+          () => switchPage('review-page'),
+          quizSummary,
+        );
+        break;
+      case 'review-page':
+        page = ReviewPage(
+          quizSummary['summary'] as List<Map<String, Object>>,
+          () => switchPage('home-page'),
+        );
         break;
       default:
         page = HomePage(() => switchPage('question-page'));

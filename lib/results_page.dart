@@ -1,39 +1,22 @@
-import 'package:europe_flag_quiz/data/questions.dart';
+import 'package:europe_flag_quiz/buttons/action_button.dart';
 import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage(this.restartQuiz, this.selectedAnswers, {super.key});
+  const ResultsPage(
+    this.restartQuiz,
+    this.reviewQuiz,
+    this.quizSummary, {
+    super.key,
+  });
 
   final VoidCallback restartQuiz;
-  final List<String> selectedAnswers;
-
-  Map<String, Object> get quizSummary {
-    final summary = List.generate(selectedAnswers.length, (index) {
-      final question = questions[index];
-      return {
-        'question_index': index,
-        'question': question.text,
-        'correct_answer': question.answers[0],
-        'user_answer': selectedAnswers[index],
-      };
-    });
-
-    final correctCount = summary
-        .where((entry) => entry['correct_answer'] == entry['user_answer'])
-        .length;
-
-    return {
-      'summary': summary,
-      'total_questions': questions.length,
-      'correct_answers': correctCount,
-    };
-  }
+  final VoidCallback reviewQuiz;
+  final Map<String, Object> quizSummary;
 
   @override
   Widget build(BuildContext context) {
-    final data = quizSummary;
-    final total = data['total_questions'] as int;
-    final correct = data['correct_answers'] as int;
+    final total = quizSummary['total_questions'] as int;
+    final correct = quizSummary['correct_answers'] as int;
 
     return Center(
       child: Column(
@@ -59,24 +42,9 @@ class ResultsPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: restartQuiz,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.blueAccent,
-              backgroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
-              textStyle: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 6,
-              shadowColor: Colors.black45,
-            ),
-            child: const Text('Restart'),
-          ),
+          if (total != correct) ActionButton('Review', reviewQuiz),
+          const SizedBox(height: 30),
+          ActionButton('Restart', restartQuiz),
         ],
       ),
     );

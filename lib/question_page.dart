@@ -1,4 +1,4 @@
-import 'package:europe_flag_quiz/answer_button.dart';
+import 'package:europe_flag_quiz/buttons/answer_button.dart';
 import 'package:europe_flag_quiz/data/questions.dart';
 import 'package:flutter/material.dart';
 

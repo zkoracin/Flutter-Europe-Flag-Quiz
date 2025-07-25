@@ -1,8 +1,9 @@
+import 'package:europe_flag_quiz/buttons/action_button.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage(this.startQuiz, {super.key});
-  final VoidCallback startQuiz;
+  const HomePage(this.onStartQuiz, {super.key});
+  final VoidCallback onStartQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +30,7 @@ class HomePage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: startQuiz,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.blueAccent,
-              backgroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
-              textStyle: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 6,
-              shadowColor: Colors.black45,
-            ),
-            child: const Text('Start'),
-          ),
+          ActionButton('Start', onStartQuiz),
         ],
       ),
     );
