@@ -30,43 +30,41 @@ class ReviewPage extends StatelessWidget {
           const SizedBox(height: 30),
 
           SizedBox(
-            height: 300,
+            height: 500,
             child: SingleChildScrollView(
               child: Column(
                 children: mistakes.map((data) {
+                  final String flagPath = 'assets/icons/${data['question']}';
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${(data['question_index'] as int) + 1}. ',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                        Image.asset(
+                          flagPath,
+                          width: 60,
+                          height: 40,
+                          fit: BoxFit.contain,
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data['question'] as String,
+                                'Your answer: ${data['user_answer']}',
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Your answer: ${data['user_answer']}',
-                                style: const TextStyle(color: Colors.redAccent),
                               ),
                               Text(
                                 'Correct answer: ${data['correct_answer']}',
                                 style: const TextStyle(
-                                  color: Colors.greenAccent,
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
