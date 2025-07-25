@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage(this.startQuiz, {super.key});
+  final VoidCallback startQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 40),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: startQuiz,
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.blueAccent,
               backgroundColor: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:europe_flag_quiz/data/questions.dart';
 import 'package:europe_flag_quiz/home_page.dart';
 import 'package:europe_flag_quiz/question_page.dart';
 import 'package:europe_flag_quiz/results_page.dart';
@@ -18,11 +19,48 @@ class QuizApp extends StatelessWidget {
   }
 }
 
-class Quiz extends StatelessWidget {
+class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
   @override
+  State<Quiz> createState() => _QuizState();
+}
+
+class _QuizState extends State<Quiz> {
+  String activePage = 'home-page';
+  List<String> selectedAnswers = [];
+
+  void switchPage(String page) {
+    setState(() {
+      activePage = page;
+      if (page == 'home-page') {
+        selectedAnswers = [];
+      }
+    });
+  }
+
+  void selectAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      switchPage('results-page');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    late final Widget page;
+
+    switch (activePage) {
+      case 'question-page':
+        page = QuestionPage(selectAnswer);
+        break;
+      case 'results-page':
+        page = ResultsPage(() => switchPage('home-page'), selectedAnswers);
+        break;
+      default:
+        page = HomePage(() => switchPage('question-page'));
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -32,10 +70,13 @@ class Quiz extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: const SafeArea(
+        child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-            child: ResultsPage(),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 16.0,
+            ),
+            child: page,
           ),
         ),
       ),

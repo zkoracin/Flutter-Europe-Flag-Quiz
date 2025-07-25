@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AnswerButton extends StatelessWidget {
-  const AnswerButton({super.key, required this.answer});
-  final String answer;
+  const AnswerButton(this.text, this.onPressed, {super.key});
+
+  final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
@@ -16,7 +18,7 @@ class AnswerButton extends StatelessWidget {
         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      child: Text(answer),
+      child: Text(text, textAlign: TextAlign.center),
     );
   }
 }
