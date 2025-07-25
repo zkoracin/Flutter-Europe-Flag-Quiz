@@ -42,7 +42,7 @@ const questions = [
   FlagQuestion('li.png', ['Liechtenstein', 'Switzerland', 'Austria']),
   FlagQuestion('mc.png', ['Monaco', 'France', 'Italy']),
   FlagQuestion('sm.png', ['San Marino', 'Vatican City', 'Andorra']),
-  FlagQuestion('va.png', ['Holy See', 'San Marino', 'Monaco']),
+  FlagQuestion('va.png', ['Vatican City', 'San Marino', 'Monaco']),
   FlagQuestion('rs.png', ['Serbia', 'Slovenia', 'Slovakia']),
   FlagQuestion('sk.png', ['Slovakia', 'Slovenia', 'Serbia']),
 ];

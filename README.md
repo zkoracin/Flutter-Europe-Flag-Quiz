@@ -1,16 +1,15 @@
-# europe_flag_quiz
+# Geographic Europe Flag Quiz
 
-A new Flutter project.
 
-## Getting Started
+The **Geographic Europe Flag Quiz** tests your knowledge of European flags. It's a simple, interactive quiz where you match the correct country name to a displayed flag. Flutter learning project.
 
-This project is a starting point for a Flutter application.
+### 🌍 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 44 questions (1 for each European country in the UN)
+- Shuffled answer options for each flag
+- Review screen for incorrect answers, showing the correct ones
+- **Home Page**: Start the quiz
+- **Quiz Page**: Displays a flag and multiple-choice answers
+- **Results Page**: Summary of correct answers
+- **Review Page**: Review mistakes with flag images and answer comparison
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
