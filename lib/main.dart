@@ -1,4 +1,5 @@
 import 'package:europe_flag_quiz/home_page.dart';
+import 'package:europe_flag_quiz/question_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const QuizApp());
@@ -33,7 +34,7 @@ class Quiz extends StatelessWidget {
         child: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-            child: HomePage(),
+            child: QuestionPage(),
           ),
         ),
       ),
